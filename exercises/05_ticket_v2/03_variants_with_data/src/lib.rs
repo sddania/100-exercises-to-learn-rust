@@ -1,4 +1,4 @@
-// TODO: Implement `Ticket::assigned_to`.
+//  Implement `Ticket::assigned_to`.
 //  Return the name of the person assigned to the ticket, if the ticket is in progress.
 //  Panic otherwise.
 

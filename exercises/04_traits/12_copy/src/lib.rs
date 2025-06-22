@@ -1,4 +1,4 @@
-// TODO: implement the necessary traits to make the test compile and pass.
+//  implement the necessary traits to make the test compile and pass.
 //  You *can't* modify the test.
 
 use std::ops::Add;

@@ -1,4 +1,4 @@
-// TODO: Define a new `SaturatingU16` type.
+//   Define a new `SaturatingU16` type.
 //   It should hold a `u16` value.
 //   It should provide conversions from `u16`, `u8`, `&u16` and `&u8`.
 //   It should support addition with a right-hand side of type

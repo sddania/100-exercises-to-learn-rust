@@ -1,4 +1,4 @@
-// TODO: Implement the `From` trait for the `WrappingU32` type to make `example` compile.
+//  Implement the `From` trait for the `WrappingU32` type to make `example` compile.
 
 #[allow(dead_code)]
 pub struct WrappingU32 {
