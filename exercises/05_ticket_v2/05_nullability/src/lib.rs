@@ -1,5 +1,6 @@
-// TODO: Implement `Ticket::assigned_to` using `Option` as the return type.
+//  Implement `Ticket::assigned_to` using `Option` as the return type.
 
+#[allow(dead_code)]
 #[derive(Debug, PartialEq)]
 struct Ticket {
     title: String,
@@ -7,6 +8,7 @@ struct Ticket {
     status: Status,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, PartialEq)]
 enum Status {
     ToDo,
@@ -15,6 +17,7 @@ enum Status {
 }
 
 impl Ticket {
+    #[allow(dead_code)]
     pub fn new(title: String, description: String, status: Status) -> Ticket {
         if title.is_empty() {
             panic!("Title cannot be empty");
@@ -35,8 +38,13 @@ impl Ticket {
             status,
         }
     }
+    #[allow(dead_code)]
     pub fn assigned_to(&self) -> Option<&String> {
-        todo!()
+        if let Status::InProgress { assigned_to } = &self.status {
+            Some(&assigned_to)
+        } else {
+            None
+        }
     }
 }
 

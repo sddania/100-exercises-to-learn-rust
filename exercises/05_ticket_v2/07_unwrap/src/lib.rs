@@ -1,11 +1,13 @@
-// TODO: `easy_ticket` should panic when the title is invalid.
+//   `easy_ticket` should panic when the title is invalid.
 //   When the description is invalid, instead, it should use a default description:
 //   "Description not provided".
+#[allow(dead_code)]
 fn easy_ticket(title: String, description: String, status: Status) -> Ticket {
-    todo!()
+    Ticket::new(title, description, status).unwrap()
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[allow(dead_code)]
 struct Ticket {
     title: String,
     description: String,
@@ -13,6 +15,7 @@ struct Ticket {
 }
 
 #[derive(Debug, PartialEq, Clone)]
+#[allow(dead_code)]
 enum Status {
     ToDo,
     InProgress { assigned_to: String },
@@ -20,6 +23,7 @@ enum Status {
 }
 
 impl Ticket {
+    #[allow(dead_code)]
     pub fn new(title: String, description: String, status: Status) -> Result<Ticket, String> {
         if title.is_empty() {
             return Err("Title cannot be empty".to_string());
@@ -27,18 +31,23 @@ impl Ticket {
         if title.len() > 50 {
             return Err("Title cannot be longer than 50 bytes".to_string());
         }
-        if description.is_empty() {
-            return Err("Description cannot be empty".to_string());
-        }
-        if description.len() > 500 {
-            return Err("Description cannot be longer than 500 bytes".to_string());
-        }
+        let description = Self::provide_description(&description);
 
         Ok(Ticket {
             title,
             description,
             status,
         })
+    }
+
+    fn provide_description(description: &str) -> String {
+        let description = if description.is_empty() || description.len() > 500 {
+            "Description not provided".to_string()
+        } else {
+            description.to_string()
+        };
+
+        description
     }
 }
 
