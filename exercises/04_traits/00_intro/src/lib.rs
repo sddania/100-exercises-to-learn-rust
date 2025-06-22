@@ -1,6 +1,6 @@
+#[allow(dead_code)]
 fn intro() -> &'static str {
-    // TODO: fix me 👇
-    "I'm ready to __!"
+    "I'm ready to learn about traits!"
 }
 
 #[cfg(test)]

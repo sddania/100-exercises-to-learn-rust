@@ -1,4 +1,4 @@
-// TODO: A (derivable) trait implementation is missing for this exercise to compile successfully.
+// A (derivable) trait implementation is missing for this exercise to compile successfully.
 //   Fix it!
 //
 // # `Debug` primer
@@ -9,6 +9,8 @@
 // If the compared type doesn't implement `Debug`, it doesn't know how to represent them!
 
 #[derive(PartialEq)]
+#[derive(Debug)]
+#[allow(dead_code)]
 struct Ticket {
     title: String,
     description: String,
