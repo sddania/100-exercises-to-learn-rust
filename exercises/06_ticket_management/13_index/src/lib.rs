@@ -1,4 +1,6 @@
-// TODO: Implement `Index<&TicketId>` and `Index<TicketId>` for `TicketStore`.
+//  Implement `Index<&TicketId>` and `Index<TicketId>` for `TicketStore`.
+
+use std::ops::Index;
 
 use ticket_fields::{TicketDescription, TicketTitle};
 
@@ -6,6 +8,17 @@ use ticket_fields::{TicketDescription, TicketTitle};
 pub struct TicketStore {
     tickets: Vec<Ticket>,
     counter: u64,
+}
+
+impl Index<&TicketId> for TicketStore {
+    type Output = Ticket;
+
+    fn index(&self, id: &TicketId) -> &Self::Output {
+        self.tickets
+            .iter()
+            .find(|ticket| &ticket.id == id)
+            .expect("Ticket not found")
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -72,7 +85,7 @@ mod tests {
             description: ticket_description(),
         };
         let id1 = store.add_ticket(draft1.clone());
-        let ticket1 = &store[id1];
+        let ticket1 = &store[&id1];
         assert_eq!(draft1.title, ticket1.title);
         assert_eq!(draft1.description, ticket1.description);
         assert_eq!(ticket1.status, Status::ToDo);
@@ -82,6 +95,7 @@ mod tests {
             description: ticket_description(),
         };
         let id2 = store.add_ticket(draft2);
+        #[allow(unused_variables)]
         let ticket2 = &store[&id2];
 
         assert_ne!(id1, id2);

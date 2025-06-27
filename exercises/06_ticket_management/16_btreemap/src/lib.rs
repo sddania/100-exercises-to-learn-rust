@@ -1,4 +1,4 @@
-// TODO: Replace `todo!()`s with the correct implementation.
+//  Replace `todo!()`s with the correct implementation.
 //  Implement `IntoIterator` for `&TicketStore`. The iterator should yield immutable
 //  references to the tickets, ordered by their `TicketId`.
 //  Implement additional traits on `TicketId` if needed.
@@ -13,7 +13,16 @@ pub struct TicketStore {
     counter: u64,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+impl<'a> IntoIterator for &'a TicketStore {
+    type Item = &'a Ticket;
+    type IntoIter = std::collections::btree_map::Values<'a, TicketId, Ticket>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.tickets.values()
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Ord, PartialOrd)]
 pub struct TicketId(u64);
 
 #[derive(Clone, Debug, PartialEq)]
@@ -41,6 +50,7 @@ impl TicketStore {
     pub fn new() -> Self {
         Self {
             tickets: todo!(),
+            #[allow(unreachable_code)]
             counter: 0,
         }
     }
@@ -54,16 +64,16 @@ impl TicketStore {
             description: ticket.description,
             status: Status::ToDo,
         };
-        todo!();
+        self.tickets.insert(id, ticket);
         id
     }
 
     pub fn get(&self, id: TicketId) -> Option<&Ticket> {
-        todo!()
+        self.tickets.get(&id)
     }
 
     pub fn get_mut(&mut self, id: TicketId) -> Option<&mut Ticket> {
-        todo!()
+        self.tickets.get_mut(&id)
     }
 }
 
@@ -106,6 +116,7 @@ mod tests {
 
         let n_tickets = 5;
 
+        #[allow(unused_variables)]
         for i in 0..n_tickets {
             let draft = TicketDraft {
                 title: ticket_title(),
