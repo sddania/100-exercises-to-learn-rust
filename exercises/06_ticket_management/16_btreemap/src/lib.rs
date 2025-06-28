@@ -49,7 +49,7 @@ pub enum Status {
 impl TicketStore {
     pub fn new() -> Self {
         Self {
-            tickets: todo!(),
+            tickets: BTreeMap::new(),
             #[allow(unreachable_code)]
             counter: 0,
         }
