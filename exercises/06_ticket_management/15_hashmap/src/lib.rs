@@ -1,4 +1,4 @@
-// TODO: Replace `todo!()`s with the correct implementation.
+//  Replace `todo!()`s with the correct implementation.
 //  Implement additional traits on `TicketId` if needed.
 
 use std::collections::HashMap;

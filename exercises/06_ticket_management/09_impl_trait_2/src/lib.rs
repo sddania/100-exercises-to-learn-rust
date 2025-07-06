@@ -1,4 +1,4 @@
-// TODO: Rework the signature of `TicketStore::add_ticket` to use a generic type parameter rather
+//  Rework the signature of `TicketStore::add_ticket` to use a generic type parameter rather
 //  than `impl Trait` syntax.
 
 use ticket_fields::{TicketDescription, TicketTitle};

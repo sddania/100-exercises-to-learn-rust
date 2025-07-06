@@ -1,4 +1,4 @@
-// TODO: Implement the `to_dos` method. It must return a `Vec` of references to the tickets
+//  Implement the `to_dos` method. It must return a `Vec` of references to the tickets
 //  in `TicketStore` with status set to `Status::ToDo`.
 use ticket_fields::{TicketDescription, TicketTitle};
 
