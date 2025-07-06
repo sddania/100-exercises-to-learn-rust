@@ -1,4 +1,5 @@
 // Not much to be exercised on `Sync`, just a thing to remember.
+#[allow(unused)]
 fn outro() -> &'static str {
     "I have a good understanding of Send and Sync!"
 }
