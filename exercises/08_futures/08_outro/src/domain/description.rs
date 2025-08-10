@@ -39,7 +39,7 @@ fn validate(description: &str) -> Result<(), TicketDescriptionError> {
 
 #[cfg(test)]
 mod tests {
-    use crate::test_helpers::{overly_long_description, valid_description};
+    use crate::domain::test_helpers::{overly_long_description, valid_description};
 
     use super::*;
     use std::convert::TryFrom;

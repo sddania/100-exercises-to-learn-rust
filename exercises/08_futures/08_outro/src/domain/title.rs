@@ -41,7 +41,7 @@ fn validate(title: &str) -> Result<(), TicketTitleError> {
 
 #[cfg(test)]
 mod tests {
-    use crate::test_helpers::{overly_long_title, valid_title};
+    use crate::domain::test_helpers::{overly_long_title, valid_title};
 
     use super::*;
     use std::convert::TryFrom;

@@ -1,4 +1,4 @@
-use crate::data::{Status, Ticket, TicketDraft};
+use crate::domain::data::{Status, Ticket, TicketDraft};
 use std::collections::BTreeMap;
 use std::sync::{Arc, RwLock};
 
@@ -37,5 +37,15 @@ impl TicketStore {
     // which allows the caller to either read or modify the ticket.
     pub fn get(&self, id: TicketId) -> Option<Arc<RwLock<Ticket>>> {
         self.tickets.get(&id).cloned()
+    }
+
+    pub fn set(&mut self, id: TicketId, ticket: Ticket) -> Result<(), &str> {
+        if self.tickets.contains_key(&id) {
+            let ticket = Arc::new(RwLock::new(ticket));
+            self.tickets.insert(id, ticket);
+            Ok(())
+        } else {
+            Err("The ticket does not exist")
+        }
     }
 }

@@ -1,4 +1,4 @@
-use crate::{description::TicketDescription, store::TicketId, title::TicketTitle};
+use crate::domain::{description::TicketDescription, store::TicketId, title::TicketTitle};
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct Ticket {
