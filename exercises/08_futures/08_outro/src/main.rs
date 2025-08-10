@@ -14,6 +14,7 @@ use outro_08::domain::store::TicketStore;
 use outro_08::routes::infra::{default_catcher, general_not_found};
 use outro_08::routes::ticket::{change, index, save};
 use rocket::{Build, Rocket};
+use std::sync::{Arc, Mutex};
 
 
 #[macro_use]
@@ -22,7 +23,7 @@ extern crate rocket;
 
 fn rocket() -> Rocket<Build> {
     rocket::build()
-        .manage(TicketStore::new())
+        .manage(Arc::new(Mutex::new(TicketStore::new())))
         .mount("/api", routes![index, save, change])
         .register("/", catchers![general_not_found, default_catcher])
 }

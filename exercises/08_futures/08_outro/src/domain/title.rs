@@ -3,6 +3,12 @@ use std::convert::TryFrom;
 #[derive(Debug, PartialEq, Clone, Eq)]
 pub struct TicketTitle(String);
 
+impl TicketTitle {
+    pub fn value(&self) -> &str {
+        &self.0
+    }
+}
+
 #[derive(Debug, thiserror::Error)]
 pub enum TicketTitleError {
     #[error("The title cannot be empty")]

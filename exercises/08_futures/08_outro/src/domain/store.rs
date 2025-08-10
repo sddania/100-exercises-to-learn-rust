@@ -1,13 +1,23 @@
 use crate::domain::data::{Status, Ticket, TicketDraft};
 use std::collections::BTreeMap;
-use std::sync::{Arc, RwLock};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct TicketId(u64);
 
+
+impl TicketId {
+    pub fn new(id: u64) -> Self {
+        TicketId(id)
+    }
+
+    pub fn value(&self) -> u64 {
+        self.0
+    }
+}
+
 #[derive(Clone)]
 pub struct TicketStore {
-    tickets: BTreeMap<TicketId, Arc<RwLock<Ticket>>>,
+    tickets: BTreeMap<TicketId, Ticket>,
     counter: u64,
 }
 
@@ -28,20 +38,22 @@ impl TicketStore {
             description: ticket.description,
             status: Status::ToDo,
         };
-        let ticket = Arc::new(RwLock::new(ticket));
         self.tickets.insert(id, ticket);
         id
     }
 
     // The `get` method should return a handle to the ticket
     // which allows the caller to either read or modify the ticket.
-    pub fn get(&self, id: TicketId) -> Option<Arc<RwLock<Ticket>>> {
-        self.tickets.get(&id).cloned()
+    pub fn get(&self, id: TicketId) -> Option<&Ticket> {
+        self.tickets.get(&id)
+    }
+    
+    pub fn get_mut(&mut self, id: TicketId) -> Option<&mut Ticket> {
+        self.tickets.get_mut(&id)
     }
 
-    pub fn set(&mut self, id: TicketId, ticket: Ticket) -> Result<(), &str> {
+    pub fn update_ticket(&mut self, id: TicketId, ticket: Ticket) -> Result<(), &str> {
         if self.tickets.contains_key(&id) {
-            let ticket = Arc::new(RwLock::new(ticket));
             self.tickets.insert(id, ticket);
             Ok(())
         } else {

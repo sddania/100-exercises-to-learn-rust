@@ -1,6 +1,12 @@
 #[derive(Debug, PartialEq, Clone, Eq)]
 pub struct TicketDescription(String);
 
+impl TicketDescription {
+    pub fn value(&self) -> &str {
+        &self.0
+    }
+}
+
 #[derive(Debug, thiserror::Error)]
 pub enum TicketDescriptionError {
     #[error("The description cannot be empty")]
